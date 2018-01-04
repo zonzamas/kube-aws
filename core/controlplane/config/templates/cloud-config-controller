@@ -990,6 +990,9 @@ write_files:
             annotations:
               scheduler.alpha.kubernetes.io/critical-pod: ''
           spec:
+            {{- if .Experimental.Admission.Priority.Enabled}}
+            priorityClassName: system-node-critical
+            {{- end}}
             tolerations:
             - operator: Exists
               effect: NoSchedule
@@ -1085,6 +1088,9 @@ write_files:
             labels:
               k8s-app: calico-policy
           spec:
+            {{- if .Experimental.Admission.Priority.Enabled}}
+            priorityClassName: system-node-critical
+            {{- end}}
             tolerations:
             - key: "node.alpha.kubernetes.io/role"
               operator: "Equal"
@@ -1164,6 +1170,9 @@ write_files:
             labels:
               k8s-app: kube-resources-autosave-policy
           spec:
+            {{- if .Experimental.Admission.Priority.Enabled}}
+            priorityClassName: system-node-critical
+            {{- end}}
             containers:
             - name: kube-resources-autosave-dumper
               image: {{.HyperkubeImage.RepoWithTag}}
@@ -1322,6 +1331,9 @@ write_files:
               annotations:
                 scheduler.alpha.kubernetes.io/critical-pod: ''
             spec:
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               initContainers:
                 - name: hyperkube
                   image: {{.HyperkubeImage.RepoWithTag}}
@@ -1404,6 +1416,9 @@ write_files:
               annotations:
                 scheduler.alpha.kubernetes.io/critical-pod: ''
             spec:
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               tolerations:
               - operator: Exists
                 effect: NoSchedule
@@ -1950,6 +1965,9 @@ write_files:
               annotations:
                 scheduler.alpha.kubernetes.io/critical-pod: ''
             spec:
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               serviceAccountName: kube-proxy
               tolerations:
               - operator: Exists
@@ -2003,6 +2021,9 @@ write_files:
         labels:
           k8s-app: kube-apiserver
       spec:
+        {{- if .Experimental.Admission.Priority.Enabled}}
+        priorityClassName: system-node-critical
+        {{- end}}  
         hostNetwork: true
         containers:
         - name: kube-apiserver
@@ -2150,6 +2171,10 @@ write_files:
         labels:
           k8s-app: kube-controller-manager
       spec:
+        {{- if .Experimental.Admission.Priority.Enabled}}
+        priorityClassName: system-node-critical
+        {{- end}}
+        hostNetwork: true
         containers:
         - name: kube-controller-manager
           image: {{.HyperkubeImage.RepoWithTag}}
@@ -2218,6 +2243,9 @@ write_files:
         labels:
           k8s-app: kube-scheduler
       spec:
+        {{- if .Experimental.Admission.Priority.Enabled}}
+        priorityClassName: system-node-critical
+        {{- end}}
         hostNetwork: true
         containers:
         - name: kube-scheduler
@@ -2262,10 +2290,16 @@ write_files:
             annotations:
               scheduler.alpha.kubernetes.io/critical-pod: ''
           spec:
+            {{- if .Experimental.Admission.Priority.Enabled}}
+            priorityClassName: system-node-critical
+            {{- end}}
             tolerations:
             - key: "CriticalAddonsOnly"
               operator: "Exists"
             hostNetwork: true
+            {{- if .Experimental.Admission.Priority.Enabled}}
+            priorityClassName: system-node-critical
+            {{- end}}
             containers:
             - name: kube-rescheduler
               image: {{ .KubeReschedulerImage.RepoWithTag }}
@@ -2321,6 +2355,9 @@ write_files:
               annotations:
                 scheduler.alpha.kubernetes.io/critical-pod: ''
             spec:
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               tolerations:
               - key: "CriticalAddonsOnly"
                 operator: "Exists"
@@ -2360,6 +2397,9 @@ write_files:
               annotations:
                 scheduler.alpha.kubernetes.io/critical-pod: ''
             spec:
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               tolerations:
               - operator: Exists
                 effect: NoSchedule
@@ -2467,6 +2507,9 @@ write_files:
               annotations:
                 scheduler.alpha.kubernetes.io/critical-pod: ''
             spec:
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               volumes:
               - name: kube-dns-config
                 configMap:
@@ -2649,6 +2692,9 @@ write_files:
               tolerations:
               - key: "CriticalAddonsOnly"
                 operator: "Exists"
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               serviceAccountName: heapster
               containers:
                 - image: {{ .HeapsterImage.RepoWithTag }}
@@ -2729,6 +2775,9 @@ write_files:
                 k8s-app: metrics-server
             spec:
               serviceAccountName: metrics-server
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               containers:
               - name: metrics-server
                 image: {{ .MetricsServerImage.RepoWithTag }}
@@ -2803,6 +2852,9 @@ write_files:
               annotations:
                 scheduler.alpha.kubernetes.io/critical-pod: ''
             spec:
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               affinity:
                 nodeAffinity:
                   requiredDuringSchedulingIgnoredDuringExecution:
@@ -2902,6 +2954,9 @@ write_files:
               labels:
                 k8s-app: kubernetes-dashboard
             spec:
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               containers:
               - name: kubernetes-dashboard
                 image: {{ .KubernetesDashboardImage.RepoWithTag }}
@@ -3005,6 +3060,9 @@ write_files:
               annotations:
                 scheduler.alpha.kubernetes.io/critical-pod: ''
             spec:
+              {{- if .Experimental.Admission.Priority.Enabled}}
+              priorityClassName: system-node-critical
+              {{- end}}
               tolerations:
               # Additions to the default tiller deployment for allowing to schedule tiller onto controller nodes
               # so that helm can be used to install pods running only on controller nodes
@@ -3388,6 +3446,9 @@ write_files:
             labels:
               name: kube2iam
           spec:
+            {{- if .Experimental.Admission.Priority.Enabled}}
+            priorityClassName: system-node-critical
+            {{- end}}
             serviceAccountName: kube2iam
             hostNetwork: true
             tolerations:

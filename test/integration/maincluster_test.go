@@ -1377,6 +1377,10 @@ worker:
 						t.Error("missing controller feature gate: PodPriority=true")
 					}
 
+					if !strings.Contains(controllerUserdataS3Part, `priorityClassName: system-node-critical`) {
+						t.Error("priorityClassName: system-node-critical should be enabled for all deployments/pods/daemonsets")
+					}
+
 					if !strings.Contains(controllerUserdataS3Part, `scheduling.k8s.io/v1alpha1=true`) {
 						t.Error("missing controller runtime config: scheduling.k8s.io/v1alpha1=true")
 					}

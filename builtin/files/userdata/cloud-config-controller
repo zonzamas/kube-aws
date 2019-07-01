@@ -1451,11 +1451,11 @@ write_files:
                 #  value: "9093"
               resources:
                 requests:
-                  cpu: {{ if .Kubernetes.Networking.SelfHosting.TyphaResources.Requests.Cpu }}{{ .Kubernetes.Networking.SelfHosting.TyphaResources.Requests.Cpu }}{{ else }}"100m"{{ end }}
-                  memory: {{ if .Kubernetes.Networking.SelfHosting.TyphaResources.Requests.Memory }}{{ .Kubernetes.Networking.SelfHosting.TyphaResources.Requests.Memory }}{{ else }}"100Mi"{{ end }}
+                  cpu: {{ .Kubernetes.Networking.SelfHosting.TyphaResources.Requests.Cpu }}
+                  memory: {{ .Kubernetes.Networking.SelfHosting.TyphaResources.Requests.Memory }}
                 limits:
-                  cpu: {{ if .Kubernetes.Networking.SelfHosting.TyphaResources.Limits.Cpu }}{{ .Kubernetes.Networking.SelfHosting.TyphaResources.Limits.Cpu }}{{ else }}"250m"{{ end }}
-                  memory: {{ if .Kubernetes.Networking.SelfHosting.TyphaResources.Limits.Memory }}{{ .Kubernetes.Networking.SelfHosting.TyphaResources.Limits.Memory }}{{ else }}"200Mi"{{ end }}
+                  cpu: {{ .Kubernetes.Networking.SelfHosting.TyphaResources.Limits.Cpu }}
+                  memory: {{ .Kubernetes.Networking.SelfHosting.TyphaResources.Limits.Memory }}
               livenessProbe:
                 httpGet:
                   path: /liveness
